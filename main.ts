@@ -34,14 +34,22 @@ input.onButtonPressed(Button.B, function () {
 })
 let gradual_bloom = 0
 hummingbird.startHummingbird()
-basic.showString("Flower v1.1")
-basic.showLeds(`
-    . # . . .
-    . # # . .
-    . # # # .
-    . # # . .
-    . # . . .
-    `)
+if (hummingbird.getBattery() == 0) {
+    while (true) {
+        basic.showIcon(IconNames.No)
+        basic.pause(100)
+        basic.showString("A Hummingbird battery pack is required. Connect one, then restart the program.")
+    }
+} else {
+    basic.showString("Flower v1.3")
+    basic.showLeds(`
+        . # . . .
+        . # # . .
+        . # # # .
+        . # # . .
+        . # . . .
+        `)
+}
 basic.forever(function () {
     hummingbird.setLED(ThreePort.One, hummingbird.getSensor(SensorType.Dial, ThreePort.One))
     hummingbird.setLED(ThreePort.Two, 100 - hummingbird.getSensor(SensorType.Dial, ThreePort.One))
