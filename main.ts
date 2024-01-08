@@ -34,31 +34,6 @@ input.onButtonPressed(Button.B, function () {
 })
 let gradual_bloom = 0
 hummingbird.startHummingbird()
-if (hummingbird.getBattery() == 0) {
-    while (true) {
-        basic.showLeds(`
-            . . . . .
-            # # # # .
-            # . . . #
-            # # # # .
-            . . . . .
-            `)
-        basic.pause(200)
-        basic.showIcon(IconNames.No)
-        basic.pause(100)
-        basic.showString("Battery low.")
-    }
-} else {
-    music.play(music.builtinPlayableSoundEffect(soundExpression.hello), music.PlaybackMode.UntilDone)
-    basic.showString("Flower v1.4")
-    basic.showLeds(`
-        . # . . .
-        . # # . .
-        . # # # .
-        . # # . .
-        . # . . .
-        `)
-}
 basic.forever(function () {
     hummingbird.setLED(ThreePort.One, hummingbird.getSensor(SensorType.Dial, ThreePort.One))
     hummingbird.setLED(ThreePort.Two, 100 - hummingbird.getSensor(SensorType.Dial, ThreePort.One))
